@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ko"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>phone-수영</title> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  <script>
+    $(function(){
+        $.ajax({
+            url : "https://api.hangang.msub.kr/",
+            type : "get",
+            dataType : "json",
+            success : function(data){
+                var temp = data.temp;
+                $(".temp").append(temp);
+                var time = data.time;
+                $(".time").append(time)
+            },
+            error : function(){
+                console.log("error!");
+            }
+        })
+    });
+
+    $(function(){
+        $.ajax({
+            url : "https://capi.msub.kr/",
+            type : "get",
+            dataType : "json",
+            success : function(data){
+                var update = data.today.update;
+                $(".update").append(update);
+                var tconfirmation = data.today.confirmation;
+                var yconfirmation = data.yesterday.confirmation;
+                $(".confirmation").append(tconfirmation+yconfirmation)
+                var tcured = data.today.cured;
+                var ycured = data.yesterday.cured;
+                $(".cured").append(tcured+ycured);
+                var tisolation = data.today.isolation;
+                var yisolation = data.yesterday.isolation;
+                $(".isolation").append(tisolation+yisolation);
+                var tdead = data.today.dead;
+                var ydead = data.yesterday.dead;
+                $(".dead").append(tdead+ydead);
+                var tsuspicion = data.today.suspicion;
+                $(".suspicion").append(tsuspicion);
+            },
+            error : function(){
+                console.log("error!");
+            }
+        })
+    });
+</script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+    html{
+        background-color: black;
+    }
+    
+    html.dark .screen{
+        background-color: rgb(42, 57, 71);
+    }
+
+    html.dark .hangang{
+        color: azure;
+        background-color: black;
+    }
+
+    html.dark .aaa{
+        color: azure;
+        background-color: black;
+    }
+
+    html.dark .covid-19{
+        color: azure;
+        background-color: black;
+    }
+
+    .phone{
+        background-color: white;
+        margin: auto;
+        width: 400px;
+        height: 860px;
+        border-radius: 40px;
+        border: 2px black solid;
+    }
+
+    .screen{
+        margin: 10px;
+        margin-top: 60px;
+        border: 10px;
+        background-color: rgb(158, 231, 228);
+        height: 700px;
+        border-radius: 3px;
+    }
+
+    #clock{
+        margin: auto;
+        margin-top: 10px;
+        text-align: center;
+        width: 300px;
+        height: 40px;
+        color: white;
+        
+    }
+
+    .hangang{
+        background-color: aqua;
+        text-align: center;
+        width: 163px;
+        height: 163px;              
+        float: left;
+        padding: 2px;
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    .aaa{
+        background-color: aqua;
+        text-align: center;
+        width: 163px;
+        height: 163px;
+        float: right;
+        padding: 2px;
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    .hangang, .aaa h1{
+        font-family: 'Black Han Sans', sans-serif;
+    }
+
+    .hangang h1{
+        color: rgb(88, 64, 223);
+    }
+
+    .covid-19{
+        background-color: aqua;
+        width: 300px;
+        height: 400px;
+        margin: auto;
+        border-radius: 10px;
+        text-align: center;
+        clear: both;
+    }
+
+    .covid-19 h1{
+        font-family: 'Black Han Sans', sans-serif;
+        color: red;
+    }
+
+    #dark{
+        background-color: white;
+        margin: auto;
+        margin-top: 12px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+
+    #dark:hover{
+        background-color: rgb(221, 224, 224);
+    }
+
+    .corona{
+        font-size: large;
+        font-family: 'Jua', sans-serif;
+    }
+
+    .desc{
+        font-size: 1px;
+        font-family: 'Jua', sans-serif;        
+    }
+
+    .desc a{
+        text-decoration: none;
+        color: rgb(223, 21, 21);
+    }
+
+    .detail1{
+        width: 6px;
+        height: 6px;
+        background-color: black;
+        position: relative;
+        left: 50%;
+        top: 3%;
+        border-radius: 50%;
+    }
+
+    .detail2{
+        width: 8px;
+        height: 8px;
+        background-color: black;
+        position: relative;
+        left: 150px;
+        top: 37px;
+        border-radius: 50%;
+    }
+
+    .detail3{
+        width: 70px;
+        height: 6px;
+        background-color: black;
+        position: relative;
+        left: 170px;
+        top: 30px;
+        border-radius: 30%;
+    }
+
+    
+
+    
+</style>
+ </head>   
+ <body> 
+  <div class="phone"> 
+   <div class="detail1"></div> 
+   <div class="detail2"></div> 
+   <div class="detail3"></div> 
+   <div class="screen"> 
+    <article id="clock"></article> 
+    <div class="hangang"> 
+     <h1>한강 온도</h1> 
+     <p class="temp">온도(°C) : </p> 
+     <p class="time">최종 측정시간 : </p> 
+    </div> 
+    <div class="aaa"> 
+     <h1>preparing</h1> 
+     <p>preparing</p> 
+     <p>preparing</p> 
+    </div> 
+    <div class="covid-19"> 
+     <h1>covid-19</h1> 
+     <br> 
+     <article class="corona"> 
+      <p class="confirmation">확진자(명) : </p> 
+      <p class="cured">완치자(명) : </p> 
+      <p class="isolation">치료중(명) : </p> 
+      <p class="dead">사망자(명) : </p> 
+      <p class="suspicion">검사중(명) : </p> 
+     </article> 
+    </div> 
+    <div class="desc"> 
+     <p>api는 <a href="http://msub.kr">msub</a>의 api를 사용하였습니다.<br>제작자 : 수영</p> 
+    </div> 
+   </div> 
+   <div id="dark"></div> 
+  </div>  
+  <script>
+    //시간
+    function printTime() {
+        var clock = document.getElementById("clock");            // 출력할 장소 선택
+        var now = new Date();                                                  // 현재시간
+        //var nowTime = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + "시 " + now.getMinutes() + "분 " + now.getSeconds() + "초 ";
+        var nowTime = now.getHours()+ " : "+ now.getMinutes();
+        clock.innerHTML = nowTime;           // 현재시간을 출력
+        setTimeout("printTime()",1000);         // setTimeout(“실행할함수”,시간) 시간은1초의 경우 1000
+    }
+    window.onload = function() {                         // 페이지가 로딩되면 실행
+        printTime();
+    }
+
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark")
+        let button = document.getElementById("dark");
+    if (button.innerHTML == " ") {
+        button.innerHTML = " ";
+    } else {
+        button.innerHTML = " ";
+    }
+    }
+
+        document.getElementById("dark").addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark")
+        let button = document.getElementById("dark");
+    if (button.innerHTML == " ") {
+        button.innerHTML = " ";
+    } else {
+        button.innerHTML = " ";
+    }
+    })
+</script> 
+ </body>
+</html>
